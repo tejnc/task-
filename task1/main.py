@@ -1,3 +1,7 @@
+'''
+This is the first api where it is able to take email address as primary
+key and name with the specified requirements.
+'''
 from os import name
 from flask import Flask, json, request, jsonify
 import sqlite3
@@ -20,7 +24,7 @@ def users():
 
     if request.method == 'GET':
         cursor=conn.execute("SELECT * FROM user")
-        #dict comprehension
+        
         users = [dict(email=row[0],name=row[1]) for row in cursor.fetchall()]
 
         if users is not None:
@@ -37,9 +41,6 @@ def users():
         for row in cursor:
             if new_email == row[0]:
                 reg_user = True
-        # cursor.execute("SELECT * FROM user WHERE id=?",(new_email))
-        # rows = cursor.fetchall()
-        
         
         if reg_user == False:
             sql="""INSERT INTO user(email,name) VALUES(?,?)"""
