@@ -32,6 +32,7 @@ def users():
         new_name = request.form['name']
         reg_user = False
 
+    
         cursor = conn.execute("SELECT email from user")
         for row in cursor:
             if new_email == row[0]:
